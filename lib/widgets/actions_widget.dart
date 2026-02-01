@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_and_0/strings/strings.dart';
 
 class ActionsWidget extends StatelessWidget {
   final VoidCallback onResetBoard;
@@ -14,13 +15,13 @@ class ActionsWidget extends StatelessWidget {
         ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: Colors.cyan.withOpacity(0.14), foregroundColor: Colors.cyanAccent),
           onPressed: onResetBoard,
-          child: const Text('Reset Board'),
+          child: const Text(Strings.resetBoard),
         ),
         const SizedBox(width: 12),
         ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: Colors.pink.withOpacity(0.14), foregroundColor: Colors.pinkAccent),
           onPressed: onResetScores,
-          child: const Text('Reset Scores'),
+          child: const Text(Strings.resetScores),
         ),
       ],
     );

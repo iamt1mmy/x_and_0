@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_and_0/strings/strings.dart';
 
 class CellWidget extends StatefulWidget {
   final String symbol;
@@ -40,10 +41,10 @@ class _CellWidgetState extends State<CellWidget> with SingleTickerProviderStateM
     if (widget.symbol == '') return const SizedBox.shrink();
     return ScaleTransition(
       scale: CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut),
-      child: widget.symbol == 'X'
+      child: widget.symbol == Strings.xSymbol
           ? ShaderMask(
               shaderCallback: (rect) => LinearGradient(colors: [widget.neon, Colors.white]).createShader(rect),
-              child: Text('X', style: TextStyle(fontSize: widget.size, fontWeight: FontWeight.w900, color: Colors.white, shadows: [BoxShadow(color: widget.neon.withOpacity(0.7), blurRadius: 18)])),
+              child: Text(widget.symbol, style: TextStyle(fontSize: widget.size, fontWeight: FontWeight.w900, color: Colors.white, shadows: [BoxShadow(color: widget.neon.withOpacity(0.7), blurRadius: 18)])),
             )
           : Container(
               width: widget.size,

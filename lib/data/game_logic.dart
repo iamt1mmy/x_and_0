@@ -1,3 +1,5 @@
+import 'package:x_and_0/strings/strings.dart';
+
 List<int>? winningComboForBoard(List<String> board, String player) {
   const wins = [
     [0, 1, 2],
@@ -16,9 +18,9 @@ List<int>? winningComboForBoard(List<String> board, String player) {
 }
 
 String? checkWinner(List<String> board) {
-  final combosX = winningComboForBoard(board, 'X');
-  if (combosX != null) return 'X';
-  final combosO = winningComboForBoard(board, 'O');
-  if (combosO != null) return 'O';
+  final combosX = winningComboForBoard(board, Strings.xSymbol);
+  if (combosX != null) return Strings.xSymbol;
+  final combosO = winningComboForBoard(board, Strings.oSymbol);
+  if (combosO != null) return Strings.oSymbol;
   return null;
 }

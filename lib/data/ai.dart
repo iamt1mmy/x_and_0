@@ -3,6 +3,7 @@ import 'dart:math';
 import 'game_logic.dart';
 
 import '../models/enums.dart';
+import 'package:x_and_0/strings/strings.dart';
 
 int? getAIMove(List<String> board, AIDifficulty difficulty, Random rand) {
   final empties = [for (int i = 0; i < 9; i++) if (board[i] == '') i];
@@ -16,14 +17,14 @@ int? getAIMove(List<String> board, AIDifficulty difficulty, Random rand) {
     // Try win
     for (var i in empties) {
       final nb = List<String>.from(board);
-      nb[i] = 'O';
-      if (winningComboForBoard(nb, 'O') != null) return i;
+      nb[i] = Strings.oSymbol;
+      if (winningComboForBoard(nb, Strings.oSymbol) != null) return i;
     }
     // Try block
     for (var i in empties) {
       final nb = List<String>.from(board);
-      nb[i] = 'X';
-      if (winningComboForBoard(nb, 'X') != null) return i;
+      nb[i] = Strings.xSymbol;
+      if (winningComboForBoard(nb, Strings.xSymbol) != null) return i;
     }
     return empties[rand.nextInt(empties.length)];
   }
@@ -41,7 +42,7 @@ int? _minimaxDecision(List<String> board, Random rand) {
   int? bestMove;
   for (var move in empties) {
     final nb = List<String>.from(board);
-    nb[move] = 'O';
+    nb[move] = Strings.oSymbol;
     final score = _minimax(nb, 0, false);
     if (score > bestScore) {
       bestScore = score;
@@ -53,15 +54,15 @@ int? _minimaxDecision(List<String> board, Random rand) {
 
 int _minimax(List<String> board, int depth, bool isMaximizing) {
   final winner = checkWinner(board);
-  if (winner == 'O') return 10 - depth;
-  if (winner == 'X') return -10 + depth;
+  if (winner == Strings.oSymbol) return 10 - depth;
+  if (winner == Strings.xSymbol) return -10 + depth;
   if (!board.contains('')) return 0;
 
   if (isMaximizing) {
     int best = -100000;
     for (int i = 0; i < 9; i++) {
-      if (board[i] == '') {
-        board[i] = 'O';
+        if (board[i] == '') {
+        board[i] = Strings.oSymbol;
         final val = _minimax(board, depth + 1, false);
         board[i] = '';
         best = max(best, val);
@@ -71,8 +72,8 @@ int _minimax(List<String> board, int depth, bool isMaximizing) {
   } else {
     int best = 100000;
     for (int i = 0; i < 9; i++) {
-      if (board[i] == '') {
-        board[i] = 'X';
+        if (board[i] == '') {
+        board[i] = Strings.xSymbol;
         final val = _minimax(board, depth + 1, true);
         board[i] = '';
         best = min(best, val);

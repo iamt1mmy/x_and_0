@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_and_0/strings/strings.dart';
 
 import '../models/enums.dart';
 
@@ -30,28 +31,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(title: const Text(Strings.settings)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Game Mode', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(Strings.gameMode, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             RadioListTile<GameMode>(
-              title: const Text('2 Players (Local)'),
+              title: const Text(Strings.twoPlayers),
               value: GameMode.local,
               groupValue: _mode,
               onChanged: (v) => setState(() => _mode = v!),
             ),
             RadioListTile<GameMode>(
-              title: const Text('Vs AI'),
+              title: const Text(Strings.vsAI),
               value: GameMode.vsAI,
               groupValue: _mode,
               onChanged: (v) => setState(() => _mode = v!),
             ),
             const SizedBox(height: 16),
-            const Text('AI Difficulty', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text(Strings.aiDifficulty, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             DropdownButton<AIDifficulty>(
               value: _difficulty,
@@ -65,9 +66,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text(Strings.cancel)),
                 const SizedBox(width: 8),
-                ElevatedButton(onPressed: _save, child: const Text('Save')),
+                ElevatedButton(onPressed: _save, child: const Text(Strings.save)),
               ],
             ),
           ],

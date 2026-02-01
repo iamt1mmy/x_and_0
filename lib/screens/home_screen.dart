@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../models/enums.dart';
 import '../data/ai.dart';
 import '../data/game_logic.dart';
+import 'package:x_and_0/strings/strings.dart';
 import 'settings_screen.dart';
 import '../widgets/home_header.dart';
 import '../widgets/board_widget.dart';
@@ -31,9 +32,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   List<String> _board = List.filled(9, '');
-  String _currentPlayer = 'X';
-  Map<String, int> _score = {'X': 0, 'O': 0, 'Draws': 0};
-  GameMode _mode = GameMode.vsAI;
+  String _currentPlayer = Strings.xSymbol;
+  Map<String, int> _score = {Strings.xSymbol: 0, Strings.oSymbol: 0, Strings.draws: 0};
+  GameMode _mode = GameMode.local;
   AIDifficulty _difficulty = AIDifficulty.hard;
 
   bool _isAnimating = false;
@@ -60,10 +61,10 @@ class _HomeScreenState extends State<HomeScreen>
   void _newGame({bool keepScore = true}) {
     setState(() {
       _board = List.filled(9, '');
-      _currentPlayer = 'X';
+      _currentPlayer = Strings.xSymbol;
       _winningCombo = [];
       _isAnimating = false;
-      if (!keepScore) _score = {'X': 0, 'O': 0, 'Draws': 0};
+      if (!keepScore) _score = {Strings.xSymbol: 0, Strings.oSymbol: 0, Strings.draws: 0};
     });
   }
 
@@ -79,14 +80,14 @@ class _HomeScreenState extends State<HomeScreen>
     }
 
     if (!_board.contains('')) {
-      setState(() => _score['Draws'] = _score['Draws']! + 1);
+      setState(() => _score[Strings.draws] = _score[Strings.draws]! + 1);
       _triggerDrawAnimation();
       return;
     }
 
     _togglePlayer();
 
-    if (_mode == GameMode.vsAI && _currentPlayer == 'O') {
+    if (_mode == GameMode.vsAI && _currentPlayer == Strings.oSymbol) {
       await Future.delayed(const Duration(milliseconds: 350));
       final aiMove = getAIMove(_board, _difficulty, _rand);
       if (aiMove != null) _makeMove(aiMove);
@@ -95,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _togglePlayer() {
     setState(() {
-      _currentPlayer = _currentPlayer == 'X' ? 'O' : 'X';
+      _currentPlayer = _currentPlayer == Strings.xSymbol ? Strings.oSymbol : Strings.xSymbol;
     });
   }
 
@@ -154,8 +155,8 @@ class _HomeScreenState extends State<HomeScreen>
                   children: [
                     const SizedBox(height: 18),
                     HomeHeader(
-                      title: 'X & 0',
-                      subtitle: 'A modern X & 0 with AI',
+                      title: Strings.appTitle,
+                      subtitle: Strings.appSubtitle,
                       onSettingsPressed: () async {
                         final res = await Navigator.of(context).push(
                           MaterialPageRoute(

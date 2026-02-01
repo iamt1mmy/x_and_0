@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:x_and_0/strings/strings.dart';
 
 class ScoreRow extends StatelessWidget {
   final Map<String, int> score;
@@ -18,9 +19,9 @@ class ScoreRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        _scoreCard('X', score['X'] ?? 0, Colors.cyanAccent),
-        _scoreCard('Draws', score['Draws'] ?? 0, Colors.white70),
-        _scoreCard('O', score['O'] ?? 0, Colors.pinkAccent),
+        _scoreCard(Strings.xSymbol, score[Strings.xSymbol] ?? 0, Colors.cyanAccent),
+        _scoreCard(Strings.draws, score[Strings.draws] ?? 0, Colors.white70),
+        _scoreCard(Strings.oSymbol, score[Strings.oSymbol] ?? 0, Colors.pinkAccent),
       ]),
     );
   }
