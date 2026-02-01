@@ -1,69 +1,52 @@
-# 🎮 X & 0 — Documentație aplicație
+# 🎮 X & 0 — Joc vesel, modern și surprinzător
 
-Un proiect Flutter simplu și modular pentru jocul X & 0, cu 2 jucători și versus AI (Easy / Medium / Hard). Această documentație explică structura codului, componentele principale, modul de funcționare al AI-ului și cum să rulezi sau extinzi aplicația.
+Bine ai venit la X & 0 — un joc mic cu suflet mare, construit cu pasiune. Acest proiect aduce o interfață neon, animații jucăușe și opțiuni atât pentru doi jucători locali, cât și pentru a concura contra unui AI cu nivele de dificultate. Joacă rapid, zâmbește la animații și bucură-te de mici detalii care fac experiența plăcută.
 
+## ✨ Features
+- Interfață modernă cu efecte neon și glassmorphism.
+- Animații pentru apariția simbolurilor și overlay de celebrare.
+- Moduri de joc: `2 Players (Local)` și `Vs AI` (Easy / Medium / Hard).
+- AI implementat cu Minimax la nivel `Hard` — decizii optimizate.
+- Scoruri pentru `X`, `O` și `Draws` afișate persistent pe durata rulării.
+- Toate textele UI extrase în `lib/strings/strings.dart` pentru ușoară localizare.
 
-**⬇️ Scurtă prezentare**
-- **Ce este**: Aplicatie mobilă X & 0 cu interfață modernă (glassmorphism + neon), animații și AI cu Minimax (nivel Hard).
-- **Moduri de joc**: *Local* (2 jucători pe același dispozitiv) și *VS AI* (X = jucător, O = AI).
+## 🚀 Run or Install
+- Cerințe: `flutter` (stable), SDK Dart compatibil cu `pubspec.yaml`.
+- Pași rapizi pentru a rula local:
 
-
-**📁 Structură proiect**
-- **`lib/`**: codul sursă Flutter.
-	- **`lib/main.dart`**: punctul de intrare; lansează app-ul (`TicTacToeApp`). Vezi [lib/main.dart](lib/main.dart).
-	- **`lib/screens/app.dart`**: container principal și gestionare temă. Vezi [lib/screens/app.dart](lib/screens/app.dart).
-	- **`lib/screens/home_screen.dart`**: ecranul principal cu logica jocului (stare board, control joc, legături către widgeturi). Vezi [lib/screens/home_screen.dart](lib/screens/home_screen.dart).
-	- **`lib/screens/settings_screen.dart`**: ecran pentru selectat *GameMode* și *AIDifficulty*. Vezi [lib/screens/settings_screen.dart](lib/screens/settings_screen.dart).
-	- **`lib/widgets/`**: componente UI reutilizabile (celule, tablou, overlay de celebrări).
-		- `lib/widgets/cell_widget.dart` — randare animată X / O. Vezi [lib/widgets/cell_widget.dart](lib/widgets/cell_widget.dart).
-		- `lib/widgets/board_widget.dart` — grilă 3x3, delegă tap‑uri. Vezi [lib/widgets/board_widget.dart](lib/widgets/board_widget.dart).
-		- `lib/widgets/home_header.dart`, `lib/widgets/score_row_widget.dart`, `lib/widgets/actions_widget.dart`, `lib/widgets/celebration_overlay.dart` — componente mici care compun `HomeScreen`.
-	- **`lib/data/`**: logică de joc și AI.
-		- `lib/data/game_logic.dart` — detectare winner, combinații câștigătoare. Vezi [lib/data/game_logic.dart](lib/data/game_logic.dart).
-		- `lib/data/ai.dart` — implementare AI (Easy: random, Medium: heuristici simple, Hard: Minimax). Vezi [lib/data/ai.dart](lib/data/ai.dart).
-	- **`lib/models/enums.dart`**: enumuri `GameMode` și `AIDifficulty`. Vezi [lib/models/enums.dart](lib/models/enums.dart).
-
-- **`test/`**: teste widget (ex. `test/widget_test.dart`). Vezi [test/widget_test.dart](test/widget_test.dart).
-
-**🧩 Componente cheie și rolul lor**
-- **`HomeScreen`**: deține starea jocului — `_board` (lista de 9 stringuri), `_currentPlayer`, `_score`, `_winningCombo`, animatoare. Interacțiunea de bază este în `_makeMove(index)`, care:
-	- validează mutarea,
-	- actualizează boardul și verifică winner prin `checkWinner()` din `game_logic.dart`,
-	- declanșează animații și actualizează scorul,
-	- dacă mod == `vsAI` și e rândul AI, cere mișcarea prin `getAIMove()`.
-
-- **`BoardWidget`**: afișează 9 celule; primește `board`, `winningCombo`, `size` și `onTap` callback.
-
-- **`CellWidget`**: afișează simbolul `'X'` sau `'O'` cu animație `ScaleTransition` și efect neon. Dacă simbolul este gol, returnează un `SizedBox.shrink()`.
-
-- **`ConfettiPainter`** (în `lib/widgets/confetti_painter.dart`): `CustomPainter` care desenează particule pentru celebrarea victoriei.
-
-**🧠 AI — cum funcționează**
-- *Easy*: alege un index aleator din pozițiile libere.
-- *Medium*: verifică prima dacă poate câștiga imediat sau dacă trebuie să blocheze adversarul; altfel alege mutare aleatorie.
-- *Hard*: folosește **Minimax** (căutare adversarială completă pentru 3x3) — evaluare +1 pentru victorie AI, -1 pentru victorie jucător, 0 pentru remiză.
-
-Pseudocod Minimax (rezumat):
-
-```text
-function minimax(board, player):
-	if terminal(board): return score
-	for each move in availableMoves:
-		apply move
-		score = minimax(board, otherPlayer)
-		undo move
-		choose max/min score based on player
-	return bestScore
+```bash
+flutter pub get
+flutter analyze
+flutter run
 ```
 
-Pentru optimizări: deoarece tabla este foarte mică (9 poziții), Minimax complet este suficient; pentru variante mai mari, adăugați alpha‑beta pruning.
+- Recomandare: folosește un dispozitiv/ emulator cu ecran vertical pentru cea mai bună experiență.
 
-**🔧 Funcții importante (locații)**
-- **Verificare câștigător**: `checkWinner(List<String> board)` în [lib/data/game_logic.dart](lib/data/game_logic.dart).
-- **Decizie AI**: `getAIMove(List<String> board, AIDifficulty difficulty, Random rand)` în [lib/data/ai.dart](lib/data/ai.dart).
-- **Reset/Scor**: `_newGame({bool keepScore = true})` în [lib/screens/home_screen.dart](lib/screens/home_screen.dart).
+## 🛠️ Development
+- Puncte de start pentru modificări:
+   - `lib/screens/home_screen.dart` — logica principală: stare board, mutări, scor, animații.
+   - `lib/widgets/board_widget.dart` și `lib/widgets/cell_widget.dart` — UI grilă și celule.
+   - `lib/data/game_logic.dart` — detectare câștigător (`winningComboForBoard`, `checkWinner`).
+   - `lib/data/ai.dart` — implementarea AI (`getAIMove`, `_minimax`).
+   - `lib/strings/strings.dart` — toate textele UI.
 
-**🛠 Extindere și sugestii**
-- Persistență setări: adaugă `shared_preferences` pentru a salva tema, modul, dificultatea.
-- Sunete & animații: folosește `audioplayers` sau `just_audio` și Lottie pentru efecte vizuale de câștig.
-- Teste: scrie teste unitare pentru `game_logic.dart` și `ai.dart` (Minimax și cazuri de remiză/victorie).
+- Sugestii rapide:
+   - Rulează `flutter analyze` după schimbări.
+   - Teste recomandate: scrie unit tests pentru `checkWinner()` și `getAIMove()`.
+
+## 🤝 Contributing
+- Vrei să contribui? Mulțumim! Pași sugerați:
+   1. Fork sau clonează repository-ul.
+   2. Creează un branch clar descriptivă: `feature/descriere` sau `fix/descriere`.
+   3. Respectă stilul codului existent și rulează `flutter analyze`.
+   4. Deschide un Pull Request cu descrierea schimbărilor și pași de testare.
+
+- Guidelines:
+   - Evită string-uri hardcodate în widget-uri — folosește `lib/strings/strings.dart`.
+   - Păstrează widget-urile cât mai mici și reutilizabile.
+
+## 🕰️ Legacy project
+- Notă: această bază de cod este concepută ca un proiect mic, ușor de extins. Dacă integrezi funcționalități majore (persistență, multiplayer online, sau audio extensiv), marchează acele modificări ca parte a migrării și documentează clar schimbările arhitecturale.
+- Recomandări pentru legacy:
+   - Pentru persistență: `shared_preferences` pentru setări, `hive`/`sqflite` pentru stări mai complexe.
+   - Pentru multiplayer real-time: consideră integrarea WebSocket / Firebase.
