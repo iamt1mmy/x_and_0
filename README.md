@@ -1,3 +1,5 @@
+https://img.shields.io/github/v/tag/n/n
+
 # 🎮 X & 0 — Joc vesel, modern și surprinzător
 
 Bine ai venit la X & 0 — un joc mic cu suflet mare, construit cu pasiune. Acest proiect aduce o interfață neon, animații jucăușe și opțiuni atât pentru doi jucători locali, cât și pentru a concura contra unui AI cu nivele de dificultate. Joacă rapid, zâmbește la animații și bucură-te de mici detalii care fac experiența plăcută.
