@@ -2,6 +2,11 @@
 
 Bine ai venit la X & 0 — un joc mic cu suflet mare, construit cu pasiune. Acest proiect aduce o interfață neon, animații jucăușe și opțiuni atât pentru doi jucători locali, cât și pentru a concura contra unui AI cu nivele de dificultate. Joacă rapid, zâmbește la animații și bucură-te de mici detalii care fac experiența plăcută.
 
+## 📱 App Screenshots
+| Home Screen | Game Time | Game Model |
+|:-----------:|:--------------:|:---------:|
+| ![Home Screen](repo_assets/home_screen1.png) | ![Game Time](repo_assets/home_screen2.png) | ![Game Model](repo_assets/game_mode.png) |
+
 ## ✨ Features
 - Interfață modernă cu efecte neon și glassmorphism.
 - Animații pentru apariția simbolurilor și overlay de celebrare.
